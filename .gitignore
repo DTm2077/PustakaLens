@@ -1,0 +1,60 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment (Crucial for that 10k count)
+venv/
+env/
+ENV/
+.env
+.venv
+
+# --- Flutter / Dart ---
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+android/.gradle
+.pub-cache/
+.pub/
+
+# --- IDE & OS Settings ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Project Specific ---
+*.rar
+*.zip
+*.log
+heritage.db
+# If your model is massive (>100MB), consider ignoring it or using Git LFS
+# artifact_classifier.keras
+new_tf_env/
+*.whl
