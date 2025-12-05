@@ -9,22 +9,34 @@ db = SessionLocal()
 print("Populating database...")
 
 # Loop through your dictionary and add to SQL
-for filename, data in artifact_data.DATABASE.items():
+for raw_key, data in artifact_data.DATABASE.items():
+    
+    # 1. CLEAN THE NAME (Remove .jpg if it exists in the key)
+    # This ensures "Peksi_batik.jpg" and "Peksi_batik" both become "Peksi_batik"
+    clean_name = raw_key.replace(".jpg", "").replace(".jpeg", "")
+    
+    # 2. CREATE THE FINAL FILENAME
+    # This ensures we always have exactly one ".jpg"
+    final_filename = f"{clean_name}.jpg"
+
     # Check if exists to avoid duplicates
-    exists = db.query(CulturalItem).filter_by(filename=filename).first()
+    exists = db.query(CulturalItem).filter_by(name=clean_name).first()
+    
     if not exists:
         item = CulturalItem(
-            filename=filename,
+            name=clean_name,    # This matches Keras output (e.g., "Peksi_batik")
             title=data["title"],
-            category="Heritage", # You can customize this later
+            category=data.get("category", "Heritage"),
             place_of_discovery=data["place_of_discovery"],
             origin=data["origin"],
-            description=data["summary"], # Note: Mapping 'summary' to 'description'
+            description=data["summary"], 
             fun_fact=data["fun_fact"],
-            image_url="" # Optional
+            
+            # 3. SAVE THE CORRECT FILENAME
+            image_url=final_filename 
         )
         db.add(item)
-        print(f"Added: {data['title']}")
+        print(f"Added: {data['title']} -> (DB Image: {final_filename})")
 
 db.commit()
 db.close()

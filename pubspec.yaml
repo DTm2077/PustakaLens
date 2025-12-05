@@ -44,4 +44,5 @@ flutter:
     - assets/images/batik/
     - assets/images/patung/ 
     - assets/images/wayang/
+    - assets/images/logo/
     # Note: I removed the trailing 'Q' and standardized the path structure.
